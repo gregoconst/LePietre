@@ -4,22 +4,19 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define(
-    "user",
+    "stock",
     {
-      nombre: {
-        type: DataTypes.STRING,
+      stock: {
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
-      apellido: {
-        type: DataTypes.STRING,
+      fecha: {
+        type: DataTypes.DATEONLY,
         allowNull: false,
+        defaultValue: DataTypes.NOW,
       },
-      empleado: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-      },
-      jefe: {
-        type: DataTypes.BOOLEAN,
+      movimiento: {
+        type: DataTypes.TEXT,
         allowNull: false,
       },
     },
