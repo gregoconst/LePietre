@@ -13,7 +13,11 @@ module.exports = (sequelize) => {
       imagen: {
         type: DataTypes.TEXT,
       },
-      precio: {
+      precioCliente: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+      },
+      precioLista: {
         type: DataTypes.FLOAT,
         allowNull: false,
       },
