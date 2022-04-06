@@ -6,7 +6,7 @@ module.exports = (sequelize) => {
   sequelize.define(
     "sale",
     {
-      
+      // ID CLIENTE, LINEA DE PEDI
     },
     { timestamps: false }
   );
