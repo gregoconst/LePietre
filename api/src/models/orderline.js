@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
         type: DataTypes.FLOAT,
         allowNull: false,
       },
-      presio: {
+      precio: {
         type: DataTypes.FLOAT,
         allowNull: false,
       },
