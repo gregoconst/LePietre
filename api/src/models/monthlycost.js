@@ -4,29 +4,29 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define(
-    "product",
+    "monthlycost",
     {
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      image: {
-        type: DataTypes.TEXT,
-      },
-      clientPrice: {
+      employee: {
         type: DataTypes.FLOAT,
         allowNull: false,
       },
-      cost: {
+      materials: {
         type: DataTypes.FLOAT,
         allowNull: false,
       },
-      productType: {
-        type: DataTypes.ENUM("pintureria", "revestimientos", "atermicos"),
+      taxes: {
+        type: DataTypes.FLOAT,
         allowNull: false,
+      },
+      extra: {
+        type: DataTypes.FLOAT,
       },
       description: {
         type: DataTypes.TEXT,
+      },
+      date: {
+        type: DataTypes.DATEONLY,
+        defaultValue: DataTypes.NOW,
       },
     },
     { timestamps: false }

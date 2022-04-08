@@ -6,7 +6,11 @@ module.exports = (sequelize) => {
   sequelize.define(
     "sale",
     {
-      // ID CLIENTE, LINEA DE PEDI
+      sold: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: false
+      }
     },
     { timestamps: false }
   );

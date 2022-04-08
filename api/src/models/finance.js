@@ -6,18 +6,18 @@ module.exports = (sequelize) => {
   sequelize.define(
     "finance",
     {
-      ingresos: {
+      // ingresos: {
+      //   type: DataTypes.FLOAT,
+      // },
+      // gastos: {
+      //   type: DataTypes.FLOAT,
+      // },
+      amount: {
         type: DataTypes.FLOAT,
       },
-      gastos: {
-        type: DataTypes.FLOAT,
-      },
-      monto: {
-        type: DataTypes.FLOAT
-      },
-      comprobante: {
-        type: DataTypes.STRING
-      }
+      // comprobante: {
+      //   type: DataTypes.STRING,
+      // },
     },
     { timestamps: false }
   );

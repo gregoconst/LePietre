@@ -10,12 +10,12 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      fecha: {
+      date: {
         type: DataTypes.DATEONLY,
         allowNull: false,
         defaultValue: DataTypes.NOW,
       },
-      movimiento: {
+      description: {
         type: DataTypes.TEXT,
         allowNull: false,
       },

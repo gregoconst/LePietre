@@ -6,19 +6,15 @@ module.exports = (sequelize) => {
   sequelize.define(
     "user",
     {
-      nombre: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      apellido: {
+      lastName: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      empleado: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-      },
-      jefe: {
+      manager: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
       },

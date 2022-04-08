@@ -6,15 +6,15 @@ module.exports = (sequelize) => {
   sequelize.define(
     "orderline",
     {
-      cantidad: {
+      quantity: {
         type: DataTypes.FLOAT,
         allowNull: false,
       },
-      descuento: {
+      discount: {
         type: DataTypes.FLOAT,
         allowNull: false,
       },
-      precio: {
+      price: {
         type: DataTypes.FLOAT,
         allowNull: false,
       },
