@@ -23,8 +23,8 @@ module.exports = (sequelize) => {
       },
       identificacionAfip: {
         type: DataTypes.ENUM(
-          "responsableInscripto",
-          "consumidorFinal",
+          "responsable inscripto",
+          "consumidor final",
           "excento"
         ),
       },
