@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const deleteProduct = Router();
-const { Product } = require("../db");
+const { Product, Stock } = require("../db");
 
 deleteProduct.delete("/:id", async (req, res, next) => {
   try {
@@ -8,6 +8,11 @@ deleteProduct.delete("/:id", async (req, res, next) => {
     if (!id) {
       return res.status(404).send("Necessary parameters not found");
     }
+    await Stock.destroy({
+      where: {
+        productId: id,
+      },
+    });
     await Product.destroy({
       where: {
         id: id,

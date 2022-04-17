@@ -1,11 +1,19 @@
 const { Router } = require("express");
 const addProduct = Router();
-const { Product } = require("../db");
+const { Product, Stock } = require("../db");
 
 addProduct.post("/", async (req, res, next) => {
   try {
-    const { name, image, clientPrice, cost, productType, description } =
-      req.body;
+    const {
+      name,
+      image,
+      clientPrice,
+      cost,
+      productType,
+      description,
+      movimiento,
+      stock,
+    } = req.body;
     if (!name || !description || !clientPrice || !cost || !productType) {
       return res.status(404).json("Necessary parameters not found");
     }
@@ -18,7 +26,16 @@ addProduct.post("/", async (req, res, next) => {
       productType,
       description,
     });
-    return res.status(201).json(newProduct)
+    await Stock.findOrCreate({
+      where: {
+        productId: newProduct?.dataValues.id,
+      },
+      defaults: {
+        stock: stock,
+        movimiento: movimiento,
+      },
+    });
+    return res.status(201).json(newProduct);
   } catch (error) {
     next(error);
   }

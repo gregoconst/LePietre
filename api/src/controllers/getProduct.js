@@ -1,10 +1,12 @@
 const { Router } = require("express");
 const getProduct = Router();
-const { Product } = require("../db");
+const { Product, Stock } = require("../db");
 
 getProduct.get("/", async (req, res, next) => {
   try {
-    const product = await Product.findAll();
+    const product = await Product.findAll({
+        include:[{model: Stock}]
+    });
     return res.status(200).send(product);
   } catch (error) {
     next(error);
