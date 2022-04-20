@@ -24,7 +24,6 @@ addClient.post("/", async (req, res, next) => {
       name: nameUpper,
       lastName: lastNameUpper,
       phone,
-      cost,
       adress,
       identificacionAfip,
       DniCuitCuil,

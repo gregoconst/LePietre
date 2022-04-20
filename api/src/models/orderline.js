@@ -18,6 +18,10 @@ module.exports = (sequelize) => {
         type: DataTypes.FLOAT,
         allowNull: false,
       },
+      subTotal: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+      },
     },
     { timestamps: false }
   );

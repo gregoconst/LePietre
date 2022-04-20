@@ -7,6 +7,7 @@ getProduct.get("/", async (req, res, next) => {
     const product = await Product.findAll({
         include:[{model: Stock}]
     });
+    console.log(product, "aaaaaaaaaaaaaaaaaa");
     return res.status(200).send(product);
   } catch (error) {
     next(error);
