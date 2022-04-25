@@ -9,6 +9,8 @@ const addOrderline = require("../controllers/addOrderline");
 const addClient = require("../controllers/addClient");
 const addSale = require("../controllers/addSale");
 const getSale = require("../controllers/getSale");
+const saleStatus = require("../controllers/saleStatus");
+
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
@@ -21,5 +23,7 @@ router.use("/addorderline", addOrderline);
 router.use("/addclient", addClient);
 router.use("/addsale", addSale);
 router.use("/getsale", getSale);
+router.use("/salestatus", saleStatus);
+
 
 module.exports = router;
