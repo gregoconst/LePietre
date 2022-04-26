@@ -6,19 +6,19 @@ module.exports = (sequelize) => {
   sequelize.define(
     "client",
     {
-      nombre: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      apellido: {
+      lastName: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      telefono: {
+      phone: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      direccion: {
+      adress: {
         type: DataTypes.STRING,
       },
       identificacionAfip: {

@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: DataTypes.NOW,
       },
-      description: {
+      movimiento: {
         type: DataTypes.TEXT,
         allowNull: false,
       },

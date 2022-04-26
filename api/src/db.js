@@ -45,8 +45,8 @@ Product.hasOne(Stock);
 Stock.belongsTo(Product);
 Client.hasMany(Sale);
 Sale.belongsTo(Client); // pasarle client id a la tabla SALE
-Orderline.hasMany(Sale);
-Sale.belongsTo(Orderline);
+Sale.hasMany(Orderline);
+Orderline.belongsTo(Sale);
 Product.hasMany(Orderline);
 Orderline.belongsTo(Product);
 Sale.belongsToMany(Monthlycost, { through: Finance });
