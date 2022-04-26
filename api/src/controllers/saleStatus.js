@@ -1,7 +1,6 @@
 const { Router } = require("express");
 const saleStatus = Router();
 const { Product, Stock, Orderline, Sale, Client } = require("../db");
-const addSale = require("./addSale");
 //como se importa del archivo db va en mayus
 
 saleStatus.put("/:id", async (req, res, next) => {
@@ -13,7 +12,9 @@ saleStatus.put("/:id", async (req, res, next) => {
       },
       include: [{ model: Orderline }],
     });
-    let allProductsId = getSale.dataValues.orderlines.map((orderline) => orderline.dataValues.productId)
+    let allProductsId = getSale.dataValues.orderlines.map(
+      (orderline) => orderline.dataValues.productId
+    );
     console.log(allProductsId, "aaaaaaaaAAA");
     await Sale.update(
       {
@@ -25,25 +26,33 @@ saleStatus.put("/:id", async (req, res, next) => {
         },
       }
     );
-    const stock = await Stock.findOne({
-      where: {
-        productId: 1
-      }
-    })
-    console.log(stock,"aaaaaaaputoooooooooooooo");
-    allProductsId.forEach(e => {
+    // const stock = await Stock.findOne({
+    //   where: {
+    //     productId: 1
+    //   }
+    // })
+    // console.log(stock,"aaaaaaa");
+    allProductsId.forEach(async (e) => {
       const stock = await Stock.findOne({
         where: {
-          productId: e
-        }
-      })
+          productId: e,
+        },
+      });
+
+      const saleOrderline = await Orderline.findOne({
+        where: {
+          productId: e,
+          saleId: id,
+        },
+      });
 
       await Stock.create({
         productId: e,
-        stock: stock.dataValues.stock - 
-      })
+        stock: stock.dataValues.stock - saleOrderline.dataValues.quantity,
+        movimiento: "Venta efectiva",
+      });
     });
-    // const getStock = 
+    // const getStock =
     // await Stock.create({
     //   productId: getSale?.dataValues.orderlines.productId,
     //   stock:
