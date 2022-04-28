@@ -40,7 +40,7 @@ editProduct.put("/:id", async (req, res, next) => {
         },
       }
     );
-    await Stock.update(
+    await Stock.update( //modificar para editar siempre el ultimo
       {
         stock: stock ? stock : clientSideStock.dataValues.stock,
         movimiento: movimiento ? movimiento : clientSideStock.dataValues.movimiento,

@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const addProduct = Router();
-const { Product, Stock } = require("../db");
+const { Product, Stockdetail } = require("../db");
 
 addProduct.post("/", async (req, res, next) => {
   try {
@@ -26,13 +26,14 @@ addProduct.post("/", async (req, res, next) => {
       productType,
       description,
     });
-    await Stock.findOrCreate({
+    await Stockdetail.findOrCreate({
       where: {
         productId: newProduct?.dataValues.id,
       },
       defaults: {
-        stock: stock,
-        movimiento: movimiento,
+        stockMovement: stock,
+        movement: movimiento,
+        totalStock: stock,
       },
     });
     return res.status(201).json(newProduct);

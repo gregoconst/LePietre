@@ -4,10 +4,10 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define(
-    "stock",
+    "stockdetail",
     {
-      stock: {
-        type: DataTypes.INTEGER,
+      stockMovement: {
+        type: DataTypes.FLOAT,
         allowNull: false,
       },
       date: {
@@ -15,8 +15,12 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: DataTypes.NOW,
       },
-      movimiento: {
+      movement: {
         type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      totalStock: {
+        type: DataTypes.FLOAT,
         allowNull: false,
       },
     },

@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const addOrderline = Router();
-const { Product, Stock, Orderline, Sale, Client } = require("../db");
+const { Product, Stockdetail, Orderline, Sale, Client } = require("../db");
 //como se importa del archivo db va en mayus
 
 addOrderline.post("/", async (req, res, next) => {
@@ -18,14 +18,14 @@ addOrderline.post("/", async (req, res, next) => {
       },
     });
     // console.log(getSaleId, "SOY getSaleId");
-    const getStock = await Stock.findOne({
+    const getStock = await Stockdetail.findOne({
       where: {
         productId: productId,
       },
     });
     //  console.log(getStock, "soy getStock");
-    if (quantity > getStock?.dataValues.stock) {
-      if (getStock?.dataValues.stock === 0){
+    if (quantity > getStock?.dataValues.totalStock) {
+      if (getStock?.dataValues.totalStock === 0){
         return res.status(418).json("No hay stock disponible")
       }
       return res.status(418).json("No podes añadir una cantidad mayor a la disponible")

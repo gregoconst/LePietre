@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const saleStatus = Router();
-const { Product, Stock, Orderline, Sale, Client } = require("../db");
+const { Product, Stockdetail, Orderline, Sale, Client } = require("../db");
 //como se importa del archivo db va en mayus
 
 saleStatus.put("/:id", async (req, res, next) => {
@@ -33,7 +33,7 @@ saleStatus.put("/:id", async (req, res, next) => {
     // })
     // console.log(stock,"aaaaaaa");
     allProductsId.forEach(async (e) => {
-      const stock = await Stock.findOne({
+      const stock = await Stockdetail.findOne({
         where: {
           productId: e,
         },
@@ -46,10 +46,12 @@ saleStatus.put("/:id", async (req, res, next) => {
         },
       });
 
-      await Stock.create({
+      await Stockdetail.create({
         productId: e,
-        stock: stock.dataValues.stock - saleOrderline.dataValues.quantity,
-        movimiento: "Venta efectiva",
+        totalStock:
+          stock.dataValues.totalStock - saleOrderline.dataValues.quantity,
+        movement: "Venta efectiva",
+        stockMovement: saleOrderline.dataValues.quantity,
       });
     });
     // const getStock =
