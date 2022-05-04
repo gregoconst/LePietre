@@ -22,6 +22,7 @@ addOrderline.post("/", async (req, res, next) => {
       where: {
         productId: productId,
       },
+      order: [["id", "DESC"]],
     });
     //  console.log(getStock, "soy getStock");
     if (quantity > getStock?.dataValues.totalStock) {

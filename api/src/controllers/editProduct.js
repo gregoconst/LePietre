@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const editProduct = Router();
-const { Product, Stock } = require("../db");
+const { Product, Stockdetail } = require("../db");
 
 editProduct.put("/:id", async (req, res, next) => {
   try {
@@ -20,11 +20,6 @@ editProduct.put("/:id", async (req, res, next) => {
         id: productId,
       },
     });
-    const clientSideStock = await Stock.findOne({
-      where: {
-        productId: productId,
-      },
-    });
     await Product.update(
       {
         name: name ? name : product.dataValues.name,
@@ -40,17 +35,33 @@ editProduct.put("/:id", async (req, res, next) => {
         },
       }
     );
-    await Stock.update( //modificar para editar siempre el ultimo
-      {
-        stock: stock ? stock : clientSideStock.dataValues.stock,
-        movimiento: movimiento ? movimiento : clientSideStock.dataValues.movimiento,
-      },
-      {
+    if (stock) {
+      const lastStock = await Stockdetail.findOne({
         where: {
           productId: productId,
         },
+        order: [["id", "DESC"]],
+      });
+      if (Math.sign(stock) === "-1") {
+        await Stockdetail.create(
+          {
+            stockMovement: stock,
+            movement: movimiento,
+            totalStock: parseFloat(lastStock.dataValues.totalStock) - parseFloat(stock),
+            productId: productId,
+          }
+        );
+      } else {
+        await Stockdetail.create(
+          {
+            stockMovement: stock,
+            movement: movimiento,
+            totalStock: parseFloat(lastStock.dataValues.totalStock) + parseFloat(stock),
+            productId: productId,
+          }
+        );
       }
-    );
+    }
     // const products = await Product.findAll();
     res.status(200).json("Producto editado correctamente");
   } catch (error) {

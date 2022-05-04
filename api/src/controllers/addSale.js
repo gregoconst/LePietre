@@ -5,10 +5,10 @@ const { Product, Stock, Orderline, Sale, Client } = require("../db");
 
 addSale.post("/", async (req, res, next) => {
   try {
-    const { id } = req.body;
+    const { ClientId } = req.body;
     const getClientInfo = await Client.findOne({
       where: {
-        id: id,
+        id: ClientId,
       },
     });
     const newSale = await Sale.create({

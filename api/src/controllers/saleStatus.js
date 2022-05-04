@@ -33,10 +33,11 @@ saleStatus.put("/:id", async (req, res, next) => {
     // })
     // console.log(stock,"aaaaaaa");
     allProductsId.forEach(async (e) => {
-      const stock = await Stockdetail.findOne({
+      const stock =  await Stockdetail.findOne({
         where: {
           productId: e,
         },
+        order: [["id", "DESC"]],
       });
 
       const saleOrderline = await Orderline.findOne({
