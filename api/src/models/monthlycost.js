@@ -29,8 +29,8 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.NOW,
       },
       total: {
-        type: DataTypes.FLOAT
-      }
+        type: DataTypes.FLOAT,
+      },
     },
     { timestamps: false }
   );

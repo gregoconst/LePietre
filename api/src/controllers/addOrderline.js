@@ -44,7 +44,7 @@ addOrderline.post("/", async (req, res, next) => {
       });
       return res.status(200).json(newOrderline); //buscar con http status
     }
-    return res.status(418).json("Ingrese un monto mayor a 0 porfa")
+    return res.status(418).json("Ingrese un monto mayor a 0")
   } catch (error) {
     next(error);
   }
