@@ -25,6 +25,7 @@ addProduct.post("/", async (req, res, next) => {
       cost,
       productType,
       description,
+      stockNumber: stock,
     });
     await Stockdetail.findOrCreate({
       where: {

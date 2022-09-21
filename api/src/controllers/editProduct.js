@@ -36,31 +36,55 @@ editProduct.put("/:id", async (req, res, next) => {
       }
     );
     if (stock) {
-      const lastStock = await Stockdetail.findOne({
+      const lastStockBeforeUpdate = await Stockdetail.findOne({
         where: {
           productId: productId,
         },
         order: [["id", "DESC"]],
       });
-      if (Math.sign(stock) === "-1") {
-        await Stockdetail.create(
-          {
-            stockMovement: stock,
-            movement: movimiento,
-            totalStock: parseFloat(lastStock.dataValues.totalStock) - parseFloat(stock),
-            productId: productId,
-          }
-        );
-      } else {
-        await Stockdetail.create(
-          {
-            stockMovement: stock,
-            movement: movimiento,
-            totalStock: parseFloat(lastStock.dataValues.totalStock) + parseFloat(stock),
-            productId: productId,
-          }
-        );
+      console.log('====================================');
+      console.log(lastStockBeforeUpdate);
+      console.log('====================================');
+      if ((parseFloat(lastStockBeforeUpdate?.dataValues.totalStock) - parseFloat(stock)) >= 0){
+        return res.status(418).json("No podes dejar el stock en negativo")
       }
+      if (Math.sign(stock) === "-1") {
+        await Stockdetail.create({
+          stockMovement: stock,
+          movement: movimiento,
+          totalStock:
+            parseFloat(lastStockBeforeUpdate?.dataValues.totalStock) - parseFloat(stock), //ESTAS INTENTANDO QUEDARTE CON EL ULTIMO STOCK Y NO DEJARLO EN NEGATIVO IMBECIL
+          productId: productId,
+        });
+      } else {
+        await Stockdetail.create({
+          stockMovement: stock,
+          movement: movimiento,
+          totalStock:
+            parseFloat(lastStockBeforeUpdate?.dataValues.totalStock) + parseFloat(stock),
+          productId: productId,
+        });
+
+      }
+      const lastStockAfterUpdate = await Stockdetail.findOne({
+        where: {
+          productId: productId,
+        },
+        order: [["id", "DESC"]],
+      });
+      console.log('====================================');
+      console.log(lastStockAfterUpdate);
+      console.log('====================================');
+      await Product.update(
+        {
+          stockNumber: lastStockAfterUpdate?.dataValues.totalStock,
+        },
+        {
+          where: {
+            id: productId,
+          },
+        }
+      );
     }
     // const products = await Product.findAll();
     res.status(200).json("Producto editado correctamente");

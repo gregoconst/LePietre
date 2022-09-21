@@ -28,6 +28,9 @@ module.exports = (sequelize) => {
       description: {
         type: DataTypes.TEXT,
       },
+      stockNumber: {
+        type: DataTypes.INTEGER,
+      }
     },
     { timestamps: false }
   );
